@@ -132,46 +132,49 @@ fenced JSON verdict block. A summary does not satisfy this field.]
 
 Quote source text directly in each field below. Paraphrase does not satisfy them.
 
+
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+1. `--limit 3`, first rubric: 2/3 (issue-01 rejected on `scope_fits_newcomer`)
+2. `--limit 3`, loosened the file count wording: 2/3
+3. `--limit 3`, new scope row accidentally added next to the old one: 2/3
+4. `--only issue-01 --out`, to read the grader's reasoning: 0/1
+5. `--only issue-01`, fixed a merged table row, added `issue_open_and_wanted`, defined what an open design decision is: 1/1
+6. Full run: 16/20 (clear-accept 4/8, every other category perfect)
+7. `--only` on 11 issues (the 4 misses plus every scope and dead repo issue), scope rewritten to fail only on positive evidence, commits and releases counted for `maintainer_active`: 8/11
+8. Full run: 18/20, category floor unmet (policy 0/1)
+9. `--only issue-01,issue-12`, added `policy_allows_contribution` and limited scope clause (a) to code: 2/2
+10. Full run, saved as `eval-run.txt`: 19/20, bar PASS
 
 **Issue analysis**
 
-[One scored issue, identified by id (`issue-01` through `issue-20`; the `calib-`
-issues are not scored). State your rubric's decision, the gold label, and the
-reasoning that produced your rubric's result.]
+issue-19. My rubric decided **reject**, failing `scope_fits_newcomer`. The gold label is **accept**.
+
+The grader's evidence in my final run:
+
+> "Issue names two unresolved root causes ('There are two potential causes which should be fixed') plus three further suggestions (multiprocessing, category-scoped matching, separate thread for rewrite application) spanning matcher engine, UI update path, and threading model with no settled approach"
+
+My scope check says "a reporter's guesses about causes or possible approaches are not reasons to fail," but it also fails an issue on (a) a redesign across modules or (b) an open question that must be settled before work starts. The reporter wrote that the causes "should be fixed," so the grader read the guesses as requirements, and three suggestions spanning several subsystems looked like an unsettled redesign. The two parts of my rule pull against each other on this wording. The same issue was accepted in runs 7 and 8 with no change that affected it, so this is a borderline call where the grader flips, not a clear miss. I left it because I was already at 19/20, and tightening the carve out risked letting issue-15 and issue-20 back through.
 
 **Check rationale**
 
-[One check from the `rubric.md` uploaded to `tools/issue-select/`, quoted as it is
-currently written, with the reasoning behind its current form.]
+> | policy_allows_contribution | Repo-facts block: contribution policy line (CONTRIBUTING.md or linked contributing docs), especially any Generative AI section | The policy does not prohibit AI generated or AI assisted code or documentation, and does not require anything a course contributor cannot do before opening a PR (such as prior maintainer approval of the contributor, or signing an agreement the contributor cannot sign). Policies that welcome AI tools or only require the contributor to review and understand AI output pass. If no policy is stated, pass | required |
+
+My first rubric had no check that read the contribution policy. Issue-12 was rejected in run 6 only by accident, because the old strict scope check caught it. Once I loosened scope in run 8, issue-12 was accepted and the policy category dropped to 0/1, failing the category floor. Its bundle quotes BookWyrm's policy: "We do not accept AI-generated code or documentation." This course has me work with Claude Code, so a repo with that policy is off limits no matter how good the issue is. I added the sentence letting through policies that only require reviewing AI output because conda's policy (issue-01) says contributors "must review and understand AI-generated content," and I did not want the grader to read that as a restriction.
 
 **Trade-offs**
 
-[What the quoted check gives up. Any one of these is a complete answer: an issue whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+This check rejects any repo whose policy bans AI generated contributions, even when the issue itself is ideal, and a strict grader could read a vaguely worded policy as a ban. To test that it did not overreach, I used a canary: in run 9 I reran `--only issue-01,issue-12`. Issue-12 flipped to reject as intended, and issue-01, whose policy welcomes AI tools but requires reviewing the output, stayed accept. In the final full run, every other category kept its result (claimed 4/4, dead repo 3/3, scope 4/4), so the check did not change anything outside policy.
 
 ---
 
 ## Selection rationale
 
-Graded on whether all three are answered, in your own words. Not on how good the
-reasoning is, and not on length — a short honest answer to each earns the full marks.
-This is also the basis for the claim comment you write in Unit 2.
-
 **Selection rationale**
 
-[Answer all three:
-
-1. The issue's fit to your interests and to the time available.
-2. What the verdict identified correctly, and what you weighed that the rubric could
-   not.
-3. The anticipated difficulty in claiming it.]
+1. [Fit and time: why #72 matches your interests and how the 1 to 2 hour estimate fits your schedule.]
+2. [What the verdict got right, and what you weighed that the rubric could not.]
+3. [Difficulty in claiming it.]
 
 ---
 
