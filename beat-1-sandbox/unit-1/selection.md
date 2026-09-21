@@ -172,10 +172,12 @@ This check rejects any repo whose policy bans AI generated contributions, even w
 
 **Selection rationale**
 
-1. [Fit and time: why #72 matches your interests and how the 1 to 2 hour estimate fits your schedule.]
-2. [What the verdict got right, and what you weighed that the rubric could not.]
-3. [Difficulty in claiming it.]
 
+1. #72 fits what I want to practice: it is Python backend logic in `core/security.py` with an existing test I can make pass, so I get to read unfamiliar code, work with tests, and ship a small, clean PR. 
+
+2. The verdict correctly confirmed that the repo is active, the issue is open with a good first issue label and no open PR, the scope is limited to two named files, and the contribution policy allows AI assisted work. What it could not weigh was whether I can get the project running locally, and how careful the fix needs to be. 
+
+3. The house rule says that does not block me, but my PR will not be the only one, so my claim comment and PR description need to explain my approach clearly. I also need to set up the environment and reproduce the failing test before I claim it, so I am not claiming something I cannot finish.
 ---
 
 Related paths: `eval-run.txt` in this directory; your skill's files in
